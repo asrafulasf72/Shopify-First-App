@@ -1,0 +1,33 @@
+.product-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid #e1e3e5;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge-active {
+  background: #e3f9e5;
+  color: #1a7a2e;
+}
+
+.badge-draft {
+  background: #f0f0f0;
+  color: #6b7177;
+}
