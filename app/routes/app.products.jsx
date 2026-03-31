@@ -1,3 +1,4 @@
+import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { authenticate } from "../shopify.server";
 
@@ -87,7 +88,6 @@ function VariantPill({ available, total }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-      {/* Bar */}
       <div style={{
         width: "80px", height: "6px", borderRadius: "99px",
         background: "#e5e7eb", overflow: "hidden",
@@ -97,8 +97,7 @@ function VariantPill({ available, total }) {
           background: barColor, borderRadius: "99px",
         }} />
       </div>
-      {/* Label */}
-      <div style={{ fontSize: "11px", display: "flex", gap: "3px", flexWrap: "wrap" }}>
+      <div style={{ fontSize: "11px", display: "flex", gap: "3px" }}>
         <span style={{ color: barColor, fontWeight: "600" }}>{available}/{total}</span>
         <span style={{ color: "#9ca3af" }}>
           {unavailable > 0 ? `(${unavailable} out)` : "✓ all ok"}
@@ -108,22 +107,113 @@ function VariantPill({ available, total }) {
   );
 }
 
-// ── Small action button ─────────────────────────────────────────────
-function ActionBtn({ onClick, title, bg = "#fff", border = "#e5e7eb", icon }) {
+// ── Dropdown action menu ────────────────────────────────────────────
+function DropdownMenu({ product, navigate, rowIndex, totalRows }) {
+  const [open, setOpen] = React.useState(false);
+
+  // The dropdown of the last 3 rows will go up, the rest will go down.
+  const openUpward = rowIndex >= totalRows - 3;
+
+  const actions = [
+    {
+      icon: "👁️",
+      label: "Product Details",
+      onClick: () => navigate(`/app/products/${product.id.split("/").pop()}`),
+    },
+    {
+      icon: "✏️",
+      label: "Edit",
+      onClick: () => navigate(`/app/products/${product.id.split("/").pop()}`),
+    },
+    {
+      icon: "📋",
+      label: "Duplicate",
+      onClick: () => alert("Duplicate — next step এ আসবে!"),
+    },
+    { divider: true },
+    {
+      icon: "🗑️",
+      label: "Delete",
+      danger: true,
+      onClick: () => {
+        if (confirm(`"${product.title}" delete করবে?`)) {
+          alert("Delete — next step এ implement হবে!");
+        }
+      },
+    },
+  ];
+
   return (
-    <button
-      onClick={onClick}
-      title={title}
-      style={{
-        width: "28px", height: "28px", borderRadius: "6px",
-        border: `1px solid ${border}`, background: bg,
-        cursor: "pointer", fontSize: "13px",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        flexShrink: 0,
-      }}
-    >
-      {icon}
-    </button>
+    <div style={{ position: "relative" }}>
+      {/* Trigger */}
+      <button
+        onClick={(e) => { e.stopPropagation(); setOpen((o) => !o); }}
+        style={{
+          width: "30px", height: "30px", borderRadius: "6px",
+          border: "1px solid #e5e7eb",
+          background: open ? "#f3f4f6" : "#fff",
+          cursor: "pointer", fontSize: "15px",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontWeight: "700", color: "#6b7280", letterSpacing: "1px",
+        }}
+        title="Actions"
+      >
+        ···
+      </button>
+
+      {open && (
+        <>
+          {/* Backdrop */}
+          <div
+            onClick={(e) => { e.stopPropagation(); setOpen(false); }}
+            style={{ position: "fixed", inset: 0, zIndex: 10 }}
+          />
+          {/* Menu — openUpward হলে নিচ থেকে উপরে যাবে */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: "absolute", right: 0,
+              // এটাই মূল fix
+              ...(openUpward
+                ? { bottom: "36px" }
+                : { top: "36px" }),
+              background: "#fff", border: "1px solid #e5e7eb",
+              borderRadius: "10px", zIndex: 20, minWidth: "170px",
+              boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+              overflow: "hidden",
+            }}
+          >
+            {actions.map((action, i) =>
+              action.divider ? (
+                <div key={i} style={{ height: "1px", background: "#f3f4f6", margin: "4px 0" }} />
+              ) : (
+                <button
+                  key={i}
+                  onClick={() => { setOpen(false); action.onClick(); }}
+                  style={{
+                    width: "100%", padding: "9px 14px",
+                    display: "flex", alignItems: "center", gap: "10px",
+                    background: "none", border: "none",
+                    cursor: "pointer", fontSize: "13px", fontWeight: "500",
+                    color: action.danger ? "#dc2626" : "#374151",
+                    textAlign: "left",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.background = action.danger ? "#fff5f5" : "#f9fafb")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.background = "none")
+                  }
+                >
+                  <span style={{ fontSize: "15px" }}>{action.icon}</span>
+                  {action.label}
+                </button>
+              )
+            )}
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 
@@ -137,8 +227,7 @@ export default function ProductsPage() {
     navigate(`/app/products?cursor=${last}`);
   };
 
-  // grid: product col flexible, বাকিগুলো fixed — Action এ 96px দিলে 3 button ঠিক fit করে
-  const COLS = "minmax(140px,2fr) 84px 96px 78px 108px 76px 96px";
+  const COLS = "minmax(140px,2fr) 84px 96px 78px 108px 76px 50px";
 
   return (
     <s-page heading="Products">
@@ -146,7 +235,7 @@ export default function ProductsPage() {
       {/* ── Stats ── */}
       <div style={{ display: "flex", gap: "16px", marginBottom: "24px" }}>
         {[
-          { label: "এই page এ", value: products.length, color: "#6366f1", icon: "📦" },
+          { label: "This Page", value: products.length, color: "#6366f1", icon: "📦" },
           { label: "Active", value: products.filter((p) => p.status === "ACTIVE").length, color: "#10b981", icon: "✅" },
           { label: "Draft", value: products.filter((p) => p.status === "DRAFT").length, color: "#f59e0b", icon: "📝" },
           { label: "Low stock", value: products.filter((p) => p.totalInventory < 3).length, color: "#ef4444", icon: "⚠️" },
@@ -185,7 +274,7 @@ export default function ProductsPage() {
           padding: "10px 16px",
           background: "#f9fafb", borderBottom: "1px solid #e5e7eb",
         }}>
-          {["Product", "Price", "Compare", "Disc.", "Variants", "Status", "Action"].map((h) => (
+          {["Product", "Price", "Compare", "Disc.", "Variants", "Status", "Actions"].map((h) => (
             <span key={h} style={{
               fontSize: "11px", fontWeight: "600", color: "#6b7280",
               textTransform: "uppercase", letterSpacing: "0.04em",
@@ -305,32 +394,9 @@ export default function ProductsPage() {
                 {isActive ? "Active" : "Draft"}
               </span>
 
-              {/* Action — 3 fixed-size buttons, always visible */}
-              <div
-                style={{ display: "flex", gap: "4px" }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ActionBtn
-                  icon="👁️"
-                  title="Details দেখো"
-                  onClick={() => navigate(`/app/products/${product.id.split("/").pop()}`)}
-                />
-                <ActionBtn
-                  icon="📋"
-                  title="Duplicate"
-                  onClick={() => alert("Duplicate — next step এ আসবে!")}
-                />
-                <ActionBtn
-                  icon="🗑️"
-                  title="Delete"
-                  bg="#fff5f5"
-                  border="#fee2e2"
-                  onClick={() => {
-                    if (confirm(`"${product.title}" delete করবে?`)) {
-                      alert("Delete — next step এ implement হবে!");
-                    }
-                  }}
-                />
+              {/* Action dropdown */}
+              <div onClick={(e) => e.stopPropagation()}>
+                <DropdownMenu product={product} navigate={navigate} rowIndex={index} totalRows={products.length} />
               </div>
             </div>
           );
