@@ -1,6 +1,7 @@
 import React from "react";
-import { useLoaderData, useNavigate } from "react-router";
+import { useLoaderData, useNavigate, useFetcher } from "react-router";
 import { authenticate } from "../shopify.server";
+import { useAppBridge } from "@shopify/app-bridge-react";
 
 export const loader = async ({ request }) => {
   const { admin } = await authenticate.admin(request);
@@ -17,10 +18,7 @@ export const loader = async ({ request }) => {
             title
             status
             totalInventory
-            featuredImage {
-              url
-              altText
-            }
+            featuredImage { url altText }
             variants(first: 10) {
               edges {
                 node {
@@ -35,10 +33,7 @@ export const loader = async ({ request }) => {
           }
           cursor
         }
-        pageInfo {
-          hasNextPage
-          endCursor
-        }
+        pageInfo { hasNextPage endCursor }
       }
     }`,
     { variables: { cursor } }
@@ -49,19 +44,15 @@ export const loader = async ({ request }) => {
   const products = data.data.products.edges.map((e) => {
     const variants = e.node.variants.edges.map((v) => v.node);
     const firstVariant = variants[0];
-
     const mainPrice = parseFloat(firstVariant?.price || 0);
     const comparePrice = firstVariant?.compareAtPrice
       ? parseFloat(firstVariant.compareAtPrice)
       : null;
-
     const discount =
       comparePrice && comparePrice > mainPrice
         ? Math.round(((comparePrice - mainPrice) / comparePrice) * 100)
         : null;
-
     const availableVariants = variants.filter((v) => v.availableForSale).length;
-    const totalVariants = variants.length;
 
     return {
       ...e.node,
@@ -70,18 +61,64 @@ export const loader = async ({ request }) => {
       comparePrice,
       discount,
       availableVariants,
-      totalVariants,
+      totalVariants: variants.length,
       variants,
     };
   });
 
-  const pageInfo = data.data.products.pageInfo;
-  return { products, pageInfo, currentCursor: cursor };
+  return {
+    products,
+    pageInfo: data.data.products.pageInfo,
+    currentCursor: cursor,
+  };
 };
 
-// ── Variant progress bar ────────────────────────────────────────────
+export const action = async ({ request }) => {
+  const { admin } = await authenticate.admin(request);
+  const formData = await request.formData();
+  const intent = formData.get("intent");
+  const productId = formData.get("productId");
+  const productTitle = formData.get("productTitle");
+
+  if (intent === "delete") {
+    await admin.graphql(
+      `#graphql
+      mutation deleteProduct($id: ID!) {
+        productDelete(input: { id: $id }) {
+          deletedProductId
+          userErrors { field message }
+        }
+      }`,
+      { variables: { id: productId } }
+    );
+    return { success: true, intent: "delete", title: productTitle };
+  }
+
+  if (intent === "duplicate") {
+  const response = await admin.graphql(
+    `#graphql
+    mutation duplicateProduct($productId: ID!, $newTitle: String!) {
+      productDuplicate(productId: $productId, newTitle: $newTitle, includeImages: true) {
+        newProduct { id title }
+        userErrors { field message }
+      }
+    }`,
+    { variables: { productId, newTitle: `${productTitle} (Copy)` } }
+  );
+  const data = await response.json();
+  const newProduct = data.data.productDuplicate.newProduct;
+  return {
+    success: true,
+    intent: "duplicate",
+    newProductId: newProduct?.id,
+    title: productTitle,
+  };
+}
+
+  return { success: false };
+};
+
 function VariantPill({ available, total }) {
-  const unavailable = total - available;
   const pct = total > 0 ? (available / total) * 100 : 0;
   const barColor =
     available === total ? "#10b981" : available === 0 ? "#ef4444" : "#f59e0b";
@@ -100,54 +137,75 @@ function VariantPill({ available, total }) {
       <div style={{ fontSize: "11px", display: "flex", gap: "3px" }}>
         <span style={{ color: barColor, fontWeight: "600" }}>{available}/{total}</span>
         <span style={{ color: "#9ca3af" }}>
-          {unavailable > 0 ? `(${unavailable} out)` : "✓ all ok"}
+          {total - available > 0 ? `(${total - available} out)` : "✓ all ok"}
         </span>
       </div>
     </div>
   );
 }
 
-// ── Dropdown action menu ────────────────────────────────────────────
-function DropdownMenu({ product, navigate, rowIndex, totalRows }) {
+function DropdownMenu({ product, navigate, fetcher, rowIndex, totalRows }) {
   const [open, setOpen] = React.useState(false);
-
-  // The dropdown of the last 3 rows will go up, the rest will go down.
   const openUpward = rowIndex >= totalRows - 3;
+
+  const handleDelete = () => {
+    setOpen(false);
+    if (confirm(`"${product.title}" Product Will be Delete Parmantly. You Can't Undo`)) {
+      const fd = new FormData();
+      fd.append("intent", "delete");
+      fd.append("productId", product.id);
+      fd.append("productTitle", product.title);
+      fetcher.submit(fd, { method: "POST" });
+    }
+  };
+
+  const handleDuplicate = () => {
+    setOpen(false);
+    const fd = new FormData();
+    fd.append("intent", "duplicate");
+    fd.append("productId", product.id);
+    fd.append("productTitle", product.title);
+    fetcher.submit(fd, { method: "POST" });
+  };
 
   const actions = [
     {
       icon: "👁️",
       label: "Product Details",
-      onClick: () => navigate(`/app/products/${product.id.split("/").pop()}`),
+      onClick: () => {
+        setOpen(false);
+        navigate(`/app/products/${product.id.split("/").pop()}`);
+      },
     },
     {
       icon: "✏️",
       label: "Edit",
-      onClick: () => navigate(`/app/products/${product.id.split("/").pop()}`),
+      onClick: () => {
+        setOpen(false);
+        navigate(`/app/products/${product.id.split("/").pop()}?mode=edit`);
+      },
     },
     {
       icon: "📋",
       label: "Duplicate",
-      onClick: () => alert("Duplicate — next step এ আসবে!"),
+      onClick: handleDuplicate,
     },
     { divider: true },
     {
       icon: "🗑️",
       label: "Delete",
       danger: true,
-      onClick: () => {
-        if (confirm(`"${product.title}" delete করবে?`)) {
-          alert("Delete — next step এ implement হবে!");
-        }
-      },
+      onClick: handleDelete,
     },
   ];
 
   return (
     <div style={{ position: "relative" }}>
-      {/* Trigger */}
       <button
-        onClick={(e) => { e.stopPropagation(); setOpen((o) => !o); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpen((o) => !o);
+        }}
         style={{
           width: "30px", height: "30px", borderRadius: "6px",
           border: "1px solid #e5e7eb",
@@ -156,40 +214,39 @@ function DropdownMenu({ product, navigate, rowIndex, totalRows }) {
           display: "flex", alignItems: "center", justifyContent: "center",
           fontWeight: "700", color: "#6b7280", letterSpacing: "1px",
         }}
-        title="Actions"
       >
         ···
       </button>
 
       {open && (
         <>
-          {/* Backdrop */}
           <div
-            onClick={(e) => { e.stopPropagation(); setOpen(false); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen(false);
+            }}
             style={{ position: "fixed", inset: 0, zIndex: 10 }}
           />
-          {/* Menu — openUpward হলে নিচ থেকে উপরে যাবে */}
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
               position: "absolute", right: 0,
-              // এটাই মূল fix
-              ...(openUpward
-                ? { bottom: "36px" }
-                : { top: "36px" }),
+              ...(openUpward ? { bottom: "36px" } : { top: "36px" }),
               background: "#fff", border: "1px solid #e5e7eb",
               borderRadius: "10px", zIndex: 20, minWidth: "170px",
-              boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-              overflow: "hidden",
+              boxShadow: "0 8px 24px rgba(0,0,0,0.12)", overflow: "hidden",
             }}
           >
             {actions.map((action, i) =>
               action.divider ? (
-                <div key={i} style={{ height: "1px", background: "#f3f4f6", margin: "4px 0" }} />
+                <div
+                  key={i}
+                  style={{ height: "1px", background: "#f3f4f6", margin: "4px 0" }}
+                />
               ) : (
                 <button
                   key={i}
-                  onClick={() => { setOpen(false); action.onClick(); }}
+                  onClick={action.onClick}
                   style={{
                     width: "100%", padding: "9px 14px",
                     display: "flex", alignItems: "center", gap: "10px",
@@ -199,7 +256,8 @@ function DropdownMenu({ product, navigate, rowIndex, totalRows }) {
                     textAlign: "left",
                   }}
                   onMouseEnter={(e) =>
-                    (e.currentTarget.style.background = action.danger ? "#fff5f5" : "#f9fafb")
+                    (e.currentTarget.style.background =
+                      action.danger ? "#fff5f5" : "#f9fafb")
                   }
                   onMouseLeave={(e) =>
                     (e.currentTarget.style.background = "none")
@@ -217,22 +275,34 @@ function DropdownMenu({ product, navigate, rowIndex, totalRows }) {
   );
 }
 
-// ── Main page ───────────────────────────────────────────────────────
 export default function ProductsPage() {
   const { products, pageInfo, currentCursor } = useLoaderData();
   const navigate = useNavigate();
+  const fetcher = useFetcher();
+  const shopify = useAppBridge();
+
+  const COLS = "minmax(140px,2fr) 84px 96px 78px 108px 76px 50px";
+
+  React.useEffect(() => {
+    if (fetcher.data?.success) {
+      if (fetcher.data.intent === "delete") {
+        shopify.toast.show(`"${fetcher.data.title}" deleted ✓`);
+      }
+      if (fetcher.data.intent === "duplicate") {
+        shopify.toast.show(`"${fetcher.data.title}" duplicated ✓`);
+      }
+    }
+  }, [fetcher.data]);
 
   const loadNext = () => {
     const last = products[products.length - 1]?.cursor;
     navigate(`/app/products?cursor=${last}`);
   };
 
-  const COLS = "minmax(140px,2fr) 84px 96px 78px 108px 76px 50px";
-
   return (
     <s-page heading="Products">
 
-      {/* ── Stats ── */}
+      {/* Stats */}
       <div style={{ display: "flex", gap: "16px", marginBottom: "24px" }}>
         {[
           { label: "This Page", value: products.length, color: "#6366f1", icon: "📦" },
@@ -265,7 +335,7 @@ export default function ProductsPage() {
         ))}
       </div>
 
-      {/* ── Table ── */}
+      {/* Table */}
       <div style={{ border: "1px solid #e5e7eb", borderRadius: "10px", overflow: "hidden" }}>
 
         {/* Header */}
@@ -274,7 +344,7 @@ export default function ProductsPage() {
           padding: "10px 16px",
           background: "#f9fafb", borderBottom: "1px solid #e5e7eb",
         }}>
-          {["Product", "Price", "Compare", "Disc.", "Variants", "Status", "Actions"].map((h) => (
+          {["Product", "Price", "Compare", "Disc.", "Variants", "Status", ""].map((h) => (
             <span key={h} style={{
               fontSize: "11px", fontWeight: "600", color: "#6b7280",
               textTransform: "uppercase", letterSpacing: "0.04em",
@@ -288,26 +358,34 @@ export default function ProductsPage() {
         {products.map((product, index) => {
           const isActive = product.status === "ACTIVE";
           const isLowStock = product.totalInventory < 3;
+          const isProcessing =
+            fetcher.state !== "idle" &&
+            fetcher.formData?.get("productId") === product.id;
 
           return (
             <div
               key={product.id}
-              onClick={() => navigate(`/app/products/${product.id.split("/").pop()}`)}
+              onClick={() =>
+                navigate(`/app/products/${product.id.split("/").pop()}`)
+              }
               style={{
                 display: "grid", gridTemplateColumns: COLS,
                 padding: "12px 16px", alignItems: "center",
                 borderTop: index === 0 ? "none" : "1px solid #f3f4f6",
-                cursor: "pointer", transition: "background 0.15s",
+                cursor: "pointer", transition: "background 0.15s, opacity 0.2s",
                 background: isLowStock ? "#fff5f5" : "#fff",
+                opacity: isProcessing ? 0.4 : 1,
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.background = isLowStock ? "#ffe4e4" : "#f9fafb")
+                (e.currentTarget.style.background =
+                  isLowStock ? "#ffe4e4" : "#f9fafb")
               }
               onMouseLeave={(e) =>
-                (e.currentTarget.style.background = isLowStock ? "#fff5f5" : "#fff")
+                (e.currentTarget.style.background =
+                  isLowStock ? "#fff5f5" : "#fff")
               }
             >
-              {/* Product */}
+              {/* Product image + title */}
               <div style={{ display: "flex", alignItems: "center", gap: "10px", minWidth: 0 }}>
                 <div style={{
                   width: "34px", height: "34px", borderRadius: "8px",
@@ -331,7 +409,7 @@ export default function ProductsPage() {
                     fontWeight: "500", fontSize: "13px", color: "#111827",
                     overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
                   }}>
-                    {product.title}
+                    {isProcessing ? "⏳ " : ""}{product.title}
                   </div>
                   {isLowStock && (
                     <span style={{ fontSize: "10px", color: "#dc2626", fontWeight: "600" }}>
@@ -346,7 +424,7 @@ export default function ProductsPage() {
                 ${product.mainPrice.toFixed(2)}
               </span>
 
-              {/* Compare */}
+              {/* Compare price */}
               <span>
                 {product.comparePrice ? (
                   <s style={{ color: "#9ca3af", fontSize: "12px" }}>
@@ -394,16 +472,22 @@ export default function ProductsPage() {
                 {isActive ? "Active" : "Draft"}
               </span>
 
-              {/* Action dropdown */}
+              {/* Dropdown action */}
               <div onClick={(e) => e.stopPropagation()}>
-                <DropdownMenu product={product} navigate={navigate} rowIndex={index} totalRows={products.length} />
+                <DropdownMenu
+                  product={product}
+                  navigate={navigate}
+                  fetcher={fetcher}
+                  rowIndex={index}
+                  totalRows={products.length}
+                />
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* ── Pagination ── */}
+      {/* Pagination */}
       <div style={{
         display: "flex", justifyContent: "space-between",
         alignItems: "center", marginTop: "20px", padding: "0 4px",
@@ -439,7 +523,7 @@ export default function ProductsPage() {
             </button>
           ) : (
             <span style={{ fontSize: "13px", color: "#10b981", alignSelf: "center" }}>
-              ✓ All Seen
+              ✓ All seen
             </span>
           )}
         </div>
