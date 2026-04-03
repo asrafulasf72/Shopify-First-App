@@ -1,6 +1,7 @@
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { authenticate } from "../shopify.server";
+import { useAppBridge } from "@shopify/app-bridge-react";
 
 export const loader = async ({ request }) => {
   const { admin } = await authenticate.admin(request);
@@ -133,6 +134,7 @@ function VariantBreakdown({ variants }) {
 export default function OutOfStockPage() {
   const { products, pageInfo, currentCursor } = useLoaderData();
   const navigate = useNavigate();
+  const shopify = useAppBridge();
 
   const loadNext = () => {
     const last = products[products.length - 1]?.cursor;
@@ -140,8 +142,8 @@ export default function OutOfStockPage() {
   };
 
   const critical = products.filter((p) => p.daysAgo > 14).length;
-  const warning  = products.filter((p) => p.daysAgo > 3 && p.daysAgo <= 14).length;
-  const recent   = products.filter((p) => p.daysAgo <= 3).length;
+  const warning = products.filter((p) => p.daysAgo > 3 && p.daysAgo <= 14).length;
+  const recent = products.filter((p) => p.daysAgo <= 3).length;
 
   return (
     <s-page heading="Out of Stock Products">
@@ -317,8 +319,11 @@ export default function OutOfStockPage() {
               {/* Actions */}
               <div style={{ display: "flex", gap: "6px" }}>
                 <button
-                  onClick={() => navigate(`/app/products/${product.id.split("/").pop()}`)}
-                  title="Details"
+                  onClick={() => {
+                    shopify.intents.invoke?.("edit:shopify/Product", {
+                      value: product.id,
+                    });
+                  }}
                   style={{
                     padding: "6px 10px", borderRadius: "6px",
                     border: "1px solid #fca5a5", background: "#fff5f5",
@@ -326,7 +331,7 @@ export default function OutOfStockPage() {
                     color: "#dc2626",
                   }}
                 >
-                  Restock
+                  🔄 Restock
                 </button>
               </div>
             </div>

@@ -148,6 +148,8 @@ function DropdownMenu({ product, navigate, fetcher, rowIndex, totalRows }) {
   const [open, setOpen] = React.useState(false);
   const openUpward = rowIndex >= totalRows - 3;
 
+  const shopify = useAppBridge()
+
   const handleDelete = () => {
     setOpen(false);
     if (confirm(`"${product.title}" Product Will be Delete Parmantly. You Can't Undo`)) {
@@ -182,7 +184,7 @@ function DropdownMenu({ product, navigate, fetcher, rowIndex, totalRows }) {
       label: "Edit",
       onClick: () => {
         setOpen(false);
-        navigate(`/app/products/${product.id.split("/").pop()}?mode=edit`);
+        shopify.intents.invoke?.("edit:shopify/Product", {value:product.id})
       },
     },
     {
