@@ -169,7 +169,7 @@ export default function OutOfStockPage() {
       )}
 
       {/* ── Stats ── */}
-      <div style={{ display: "flex", gap: "16px", marginBottom: "24px" }}>
+      {/* <div style={{ display: "flex", gap: "16px", marginBottom: "24px" }}>
         {[
           { label: "মোট out of stock", value: products.length, color: "#ef4444", icon: "📦", bg: "#fee2e2" },
           { label: "Critical (14d+)", value: critical, color: "#dc2626", icon: "🔴", bg: "#fee2e2" },
@@ -199,7 +199,7 @@ export default function OutOfStockPage() {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* ── Empty state ── */}
       {products.length === 0 && (

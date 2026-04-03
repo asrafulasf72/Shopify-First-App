@@ -176,25 +176,16 @@ export default function ProductDetailPage() {
 
         <div style={{ display: "flex", gap: "8px" }}>
           {!editMode && (
-            <button
-              onClick={() => {
-                shopify.intents.invoke?.("edit:shopify/Product", {
-                  value: product.id,
-                });
-              }}
-              style={{
-                padding: "8px 16px", borderRadius: "8px", border: "1px solid #6366f1",
-                background: "#fff", fontSize: "13px", fontWeight: "500",
-                cursor: "pointer", color: "#6366f1",
-              }}
-            >
-              ✏️ Edit in Shopify
-            </button>
+            <button onClick={() => setEditMode(true)} style={{
+              padding: "8px 16px", borderRadius: "8px", border: "1px solid #6366f1",
+              background: "#fff", fontSize: "13px", fontWeight: "500",
+              cursor: "pointer", color: "#6366f1",
+            }}>✏️ Edit</button>
           )}
           {editMode && (
             <button onClick={() => setEditMode(false)} style={{
               padding: "8px 16px", borderRadius: "8px", border: "1px solid #e5e7eb",
-              background: "#fff", fontSize: "13px", cursor: "pointer", color: "#374151",
+              background: "#fff", fontSize: "13px", fontWeight:"500", cursor: "pointer", color: "#374151",
             }}>Cancel</button>
           )}
           <button onClick={handleDelete} disabled={isDeleting} style={{
