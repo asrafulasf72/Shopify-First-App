@@ -1,0 +1,52 @@
+{{ 'aside-bar.css' | asset_url | stylesheet_tag }}
+{%- comment -%} SNIPPET: bb-sidebar — running bundle summary + checkout CTA {%- endcomment -%}
+<aside class="bb-sidebar">
+  <div class="bb-sidebar-card">
+    <h3 class="bb-sidebar-title">Your Bundle</h3>
+
+    {%- comment -%} Mobile-only collapse trigger — hidden on desktop via CSS {%- endcomment -%}
+    <button type="button" class="bb-bundle-toggle" aria-expanded="false">
+      <span class="bb-bundle-toggle-text">
+        <strong>Your Bundle</strong>
+        <span class="bb-bundle-toggle-meta">&bull; 1 Item &bull; $20</span>
+      </span>
+      <svg class="bb-bundle-toggle-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    {%- comment -%} Collapsible on mobile, always open on desktop {%- endcomment -%}
+    <div class="bb-bundle-panel">
+      <div class="bb-bundle-panel-inner">
+      <ul class="bb-bundle-list">
+        <li class="bb-bundle-item">
+          <div class="bb-bundle-item-image">{{ 'product-2' | placeholder_svg_tag: 'bb-product-image-tag' }}</div>
+          <div class="bb-bundle-item-info">
+            <span class="bb-bundle-item-name">Foaming Cleanser</span>
+            <span class="bb-bundle-item-meta">$18.00 &middot; 100ml &middot; x2</span>
+          </div>
+        </li>
+        <li class="bb-bundle-slot">
+          <span class="bb-bundle-slot-icon" aria-hidden="true">+</span>
+          <span class="bb-bundle-slot-label">Serum</span>
+        </li>
+        <li class="bb-bundle-slot">
+          <span class="bb-bundle-slot-icon" aria-hidden="true">+</span>
+          <span class="bb-bundle-slot-label">Moisturizer</span>
+        </li>
+      </ul>
+
+      <div class="bb-bundle-footer">
+        <div class="bb-bundle-total">
+          <span class="bb-bundle-total-label">Total</span>
+          <span class="bb-bundle-total-value">$20.00</span>
+        </div>
+        <button type="button" class="bb-btn bb-btn-dark bb-bundle-cta">Next: Serum &rarr;</button>
+        <p class="bb-bundle-note">Savings on completion</p>
+      </div>
+    </div>
+    </div>
+  </div>
+</aside>
+
+<script src="{{ 'aside-bar.js' | asset_url }}" defer="defer"></script>

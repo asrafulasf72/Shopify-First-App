@@ -1,0 +1,38 @@
+{{ 'match-builder-step.css' | asset_url | stylesheet_tag }}
+
+<div class="bb-steps-wrapper">
+  <div class="bb-steps-scroll" data-bb-scroll-drag>
+    <ol class="bb-steps">
+      <li class="bb-step is-complete">
+        <span class="bb-step-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.75 10.625L8.75 15.625L16.25 4.375" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="bb-step-label">Cleanser</span>
+      </li>
+      <li class="bb-step-divider-complete" aria-hidden="true"></li>
+      <li class="bb-step is-active">
+        <span class="bb-step-icon">2</span>
+        <span class="bb-step-label">Serum</span>
+      </li>
+      <li class="bb-step-divider" aria-hidden="true"></li>
+      <li class="bb-step">
+        <span class="bb-step-icon">3</span>
+        <span class="bb-step-label">Moisturizer</span>
+      </li>
+      <li class="bb-step-divider" aria-hidden="true"></li>
+      <li class="bb-step">
+        <span class="bb-step-icon">4</span>
+        <span class="bb-step-label">Moisturizer</span>
+      </li>
+      <li class="bb-step-divider" aria-hidden="true"></li>
+      <li class="bb-step">
+        <span class="bb-step-icon">5</span>
+        <span class="bb-step-label">Moisturizer</span>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<script src="{{ 'scroll-drag.js' | asset_url }}" defer="defer"></script>

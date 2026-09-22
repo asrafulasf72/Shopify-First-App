@@ -1,0 +1,47 @@
+{{ 'builder-section-head.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%} SNIPPET: bb-toolbar-row — spans full width, sits above the two columns {%- endcomment -%}
+<div class="bb-toolbar-row">
+  {%- comment -%} SNIPPET: bb-section-head — active step title + selection count {%- endcomment -%}
+  <div class="bb-section-head">
+    <div class="bb-section-head-text">
+      <h3 class="bb-section-title">Choose Your Cleanser</h3>
+      <p class="bb-section-subtitle">Start with a fresh, clean base. Choose 1.</p>
+    </div>
+    <span class="bb-selection-count">1 of 1 selected</span>
+  </div>
+
+  {%- comment -%} SNIPPET: bb-toolbar — search + category filter {%- endcomment -%}
+  <div class="bb-toolbar">
+    <div class="bb-search">
+      <input class="bb-search-input" type="text" placeholder="Search products">
+    </div>
+    <div class="bb-filter-dropdown" data-bb-dropdown>
+      <button
+        type="button"
+        class="bb-filter-trigger"
+        data-bb-dropdown-trigger
+        aria-haspopup="listbox"
+        aria-expanded="false"
+      >
+        <span class="bb-filter-trigger-label" data-bb-dropdown-label>All products</span>
+        <svg
+          class="bb-filter-trigger-icon"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+        >
+          <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <ul class="bb-filter-options" role="listbox" data-bb-dropdown-options>
+        <li class="bb-filter-option is-selected" role="option" data-value="all-products">All products</li>
+        <li class="bb-filter-option" role="option" data-value="new-arrived">New arrived</li>
+        <li class="bb-filter-option" role="option" data-value="comfortable-collection">Comfortable Collection</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script src="{{ 'dropdown-trigger.js' | asset_url }}" defer="defer"></script>

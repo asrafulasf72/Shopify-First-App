@@ -1,0 +1,15 @@
+{{ 'match-builder-header.css' | asset_url | stylesheet_tag }}
+
+  {%- comment -%} SNIPPET: bb-header — promo pill, heading, subheading, step tracker {%- endcomment -%}
+  <div class="bb-header">
+    {%- comment -%} SNIPPET: bb-promo — top savings banner {%- endcomment -%}
+    <div class="bb-promo">
+      <span class="bb-promo-icon" aria-hidden="true">{% render 'icons', name: 'promo-badge' %}</span>
+      <span class="bb-promo-text">Save 10% on your complete bundle</span>
+    </div>
+
+    <div>
+      <h2 class="bb-heading">Build Your Daily Routine</h2>
+      <p class="bb-subheading">Choose the products that work for your skin</p>
+    </div>
+  </div>

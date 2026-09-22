@@ -1,0 +1,24 @@
+  {{ 'top-pick.css' | asset_url | stylesheet_tag }}
+  <div class="bb-toppick-card">
+    {% render 'badge' %}
+
+    <div class="bb-toppick-main">
+      <div class="bb-toppick-left">
+        <span class="bb-radio bb-radio-checked"></span>
+        <div class="bb-toppick-info">
+          <p class="bb-toppick-name">Single pack</p>
+          <p class="bb-toppick-subtext">No discount</p>
+        </div>
+      </div>
+      <span class="bb-toppick-price">$29.99</span>
+    </div>
+
+    <div class="bb-color-row">
+      <label class="bb-color-label">Color #1</label>
+      <div class="bb-select-wrap">
+        <select class="bb-select">
+          <option>Black</option>
+        </select>
+      </div>
+    </div>
+  </div>
