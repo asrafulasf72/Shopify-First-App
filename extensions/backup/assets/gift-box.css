@@ -1,0 +1,41 @@
+/* ---------- Free gift banner ---------- */
+
+.bb-gift-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ede9fe;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.bb-gift-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  background: #7c5cfc;
+  border-radius: 8px;
+}
+
+.bb-gift-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bb-gift-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6d28d9;
+}
+
+.bb-gift-subtitle {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: #7c5cfc;
+}

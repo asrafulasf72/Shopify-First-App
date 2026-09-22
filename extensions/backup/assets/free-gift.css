@@ -1,0 +1,67 @@
+/* ---------- Free Gift ---------- */
+
+.bb-free-gift {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 12px 16px;
+  background: #ffffff;
+}
+
+.bb-free-gift-checkbox {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 1.5px solid #1a1a1a;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.bb-free-gift-image {
+  width: 40px;
+  height: 40px;
+  min-width: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bb-free-gift-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bb-free-gift-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bb-free-gift-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #7F56D9;
+}
+
+.bb-free-gift-subtext {
+  margin: 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* .bb-addon-price {
+  font-size: 16px;
+  font-weight: 500;
+  color: #7c5cfc;
+  white-space: nowrap;
+} */

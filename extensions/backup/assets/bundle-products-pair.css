@@ -1,0 +1,90 @@
+/* ================================================
+   PAIR LAYOUT (exactly 2 products)
+   Scoped to snippets/bundle-products-pair.liquid
+   Depends on root variables defined in bb-bundle-widget.css
+================================================ */
+
+.bb-bundle-products{
+  flex: 1 1 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 16px;
+  border-radius: var(--bundle-radius-sm);
+  overflow: hidden;
+  background: var(--bundle-white);
+}
+
+.bb-bundle-products::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--bundle-gray-200);
+}
+
+.bb-bundle-product{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 18px 16px 20px;
+}
+
+.bb-bundle-product-image{
+  width: 62px;
+  height: 62px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: var(--bundle-gray-100);
+}
+
+.bb-bundle-product-title{
+  margin: 4px 0 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--bundle-ink);
+}
+
+.bb-bundle-product-price-current{
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--bundle-ink);
+}
+
+.bb-bundle-product-price-compare{
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bundle-gray-500);
+  text-decoration: line-through;
+}
+
+.bb-bundle-products-connector{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -68%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bundle-purple);
+  color: var(--bundle-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+  box-shadow: 0 2px 4px rgba(108, 70, 245, 0.35);
+}
+
+@media (max-width: 400px){
+  .bb-bundle-product-image{
+    width: 60px;
+    height: 60px;
+  }
+}

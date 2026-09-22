@@ -1,0 +1,202 @@
+.bb-pkg-widget {
+  position: relative;
+  /* width: 430px; */
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow:
+    0 0 0 1px rgba(16,15,20,0.08),
+    0 0 12px rgba(16,15,20,0.06);
+}
+
+/* ---------- Card grid ---------- */
+
+.bb-pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.bb-pkg-card {
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 20px 8px 16px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.bb-pkg-card-popular {
+  border: 2px solid #7c5cfc;
+  background: #f5f3ff;
+}
+
+.bb-pkg-card-bestdeal {
+  background: #ffffff;
+}
+
+.bb-pkg-badge {
+  position: absolute;
+  top: -18px;
+  left: 10%;
+  background: #7c5cfc;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transform: rotate(-2deg);
+}
+
+/* ---------- Quantity chip ---------- */
+
+.bb-pkg-chip {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: #f3f4f6;
+}
+
+.bb-pkg-chip-active {
+  background: #7c5cfc;
+  color: #ffffff;
+}
+
+/* ---------- Text ---------- */
+
+.bb-pkg-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.bb-pkg-subtext {
+  margin: 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.bb-pkg-price-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bb-pkg-price {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+.bb-pkg-strike {
+  font-size: 12px;
+  color: #9ca3af;
+  text-decoration: line-through;
+  white-space: nowrap;
+}
+
+.bb-pkg-variant-link {
+  display: inline-block;
+  margin-top: auto;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* -- Select Variant Modal -- */
+.bb-variant-modal-overlay {
+  display: none;
+  position: fixed; 
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+}
+
+.bb-variant-modal-overlay.is-open {
+  display: flex;
+}
+
+.bb-variant-modal {
+  position: relative;
+  width: 240px;
+  background: #F5F5F5;
+  border-radius: 16px;
+  padding: 16px 12px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.bb-variant-modal-close {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bb-variant-modal-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bb-variant-modal-label {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 0 4px;
+}
+
+.bb-variant-modal-select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  font-size: 14px;
+}
+.bb-variant-modal-select:focus{
+  outline: none;
+  box-shadow: none;
+}
+
+.bb-variant-modal-divider {
+  height: 1px;
+  background: #e0e0e0;
+}

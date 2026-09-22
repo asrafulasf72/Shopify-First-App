@@ -1,0 +1,38 @@
+:root{
+    --bundle-purple: #7C5CFC;
+    --bundle-purple-dark: #6C46F5;
+    --bundle-purple-tint: #F3EFFE;
+    --bundle-purple-border: #C9B8FA;
+    --bundle-ink: #16151A;
+    --bundle-gray-700: #4B4B57;
+    --bundle-gray-500: #8A8894;
+    --bundle-gray-300: #E3E1E8;
+    --bundle-gray-200: #EDEBF1;
+    --bundle-gray-100: #F1F0F4;
+    --bundle-white: #FFFFFF;
+    --bundle-radius-lg: 20px;
+    --bundle-radius-md: 16px;
+    --bundle-radius-sm: 10px;
+  }
+
+  /* CTA */
+  .bb-bundle-cta{
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    background: var(--bundle-ink);
+    color: var(--bundle-white);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .bb-bundle-cta:hover{
+    background: #000000;
+  }
+
+  .bb-bundle-cta:focus-visible{
+    outline: 2px solid var(--bundle-purple);
+    outline-offset: 2px;
+  }

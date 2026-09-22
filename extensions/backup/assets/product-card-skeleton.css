@@ -1,0 +1,157 @@
+/* ==========================================================
+   Product Card Skeleton — fully self-contained
+   No dependency on root variables or shared card/button styles
+   ========================================================== */
+
+.bb-skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  border: 1px solid #d4d4d4;
+  border-radius: 14px;
+  padding: 12px;
+  background: #ffffff;
+  pointer-events: none;
+}
+.bb-skeleton-variant,
+.bb-skeleton-price, 
+.bb-skeleton-name,
+.bb-skeleton-btn,
+.bb-skeleton-image:empty{
+  display: block!important;
+}
+
+/* Image placeholder — same aspect ratio as real card image */
+.bb-skeleton-image {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  border-radius: 12px;
+  background: #f7f7f8;
+}
+
+/* Info section */
+.bb-skeleton-info {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.bb-skeleton-heading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Generic gray block used by all placeholders */
+.bb-skeleton-block {
+  display: inline-block;
+  border-radius: 8px;
+  background: #f7f7f8;
+}
+
+/* Text-shaped placeholders */
+.bb-skeleton-name {
+  width: 55%;
+  height: 20px;
+}
+
+.bb-skeleton-price {
+  width: 20%;
+  height: 20px;
+}
+
+.bb-skeleton-variant {
+  width: 70%;
+  height: 18px;
+}
+
+/* Button-shaped placeholders */
+.bb-skeleton-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.bb-skeleton-btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — mobile (max-width: 749px)
+   Same image + info + two-button grid pattern as match-builder-card.css —
+   kept in literal px here too, matching this file's "no shared variables"
+   approach.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 749px) {
+  .bb-skeleton-card {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    grid-template-areas:
+      "image   info"
+      "variant variant"
+      "cta     cta";
+    column-gap: 12px;
+    row-gap: 8px;
+    width: 100%;
+  }
+
+  .bb-skeleton-image {
+    grid-area: image;
+    aspect-ratio: 1 / 1;
+  }
+
+  .bb-skeleton-info {
+    grid-area: info;
+    gap: 6px;
+  }
+  .bb-skeleton-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .bb-skeleton-name {
+    width: 85%;
+    height: 36px;
+  }
+
+  .bb-skeleton-price {
+    width: 30%;
+    height: 16px;
+  }
+
+  .bb-skeleton-variant {
+    width: 70%;
+    height: 14px;
+  }
+
+  .bb-skeleton-actions {
+    display: contents;
+  }
+
+  .bb-skeleton-actions .bb-skeleton-btn:first-child {
+    grid-area: variant;
+  }
+
+  .bb-skeleton-actions .bb-skeleton-btn:last-child {
+    grid-area: cta;
+  }
+}
+
+@media (min-width: 768px) {
+  .bb-skeleton-info{
+    gap:6px;
+  }
+}
+
+@media (min-width: 1023px) {
+  .bb-skeleton-info{
+    gap:6px;
+  }
+}

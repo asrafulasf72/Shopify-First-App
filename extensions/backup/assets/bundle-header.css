@@ -1,0 +1,30 @@
+:root{
+  --bundle-purple-border: #C9B8FA;
+  --bundle-ink: #16151A;
+}
+
+/* Header */
+.bb-bundle-header{
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 16px;
+}
+
+.bb-bundle-header-rule{
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--bundle-purple-border);
+  border: none;
+  margin: 0;
+}
+
+.bb-bundle-header-title{
+  margin: 0;
+  flex: 0 0 auto;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--bundle-ink);
+  white-space: nowrap;
+}

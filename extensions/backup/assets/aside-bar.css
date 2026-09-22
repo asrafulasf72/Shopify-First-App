@@ -1,0 +1,270 @@
+/* --------------------------------------------------------------------------
+   SNIPPET: bb-sidebar — running bundle summary + checkout CTA
+   -------------------------------------------------------------------------- */
+
+.bb-sidebar {
+  position: sticky;
+  top: var(--bb-space-5);
+}
+
+.bb-sidebar-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bb-space-5);
+  border-radius: var(--bb-radius-lg);
+  background: var(--bb-color-sidebar-bg);
+  padding:20px 24px;
+}
+
+.bb-sidebar-title {
+  margin: 0;
+  padding-bottom: var(--bb-space-3);
+  border-bottom: 1px solid var(--bb-color-border);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.bb-bundle-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bb-space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bb-bundle-item {
+  display: flex;
+  align-items: center;
+  gap: var(--bb-space-3);
+  padding: var(--bb-space-3);
+  border: 1px solid var(--bb-color-border);
+  border-radius: var(--bb-radius-md);
+  background: var(--bb-color-bg);
+}
+
+.bb-bundle-item-image {
+  flex-shrink: 0;
+  width: 80px;
+  height: 70px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bb-color-bg-subtle);
+}
+
+.bb-bundle-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.bb-bundle-item-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #303030;
+}
+
+.bb-bundle-item-meta {
+  font-size: 16px;
+  font-weight: 500;
+  color: #303030;
+}
+
+.bb-bundle-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--bb-space-2);
+  padding: var(--bb-space-5) var(--bb-space-3);
+  border: 1.5px dashed var(--bb-color-border);
+  border-radius: var(--bb-radius-md);
+  background: var(--bb-color-bg);
+  color: var(--bb-color-text-muted);
+}
+
+.bb-bundle-slot-icon {
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--bb-color-text-muted);
+}
+
+.bb-bundle-slot-label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.bb-bundle-footer {
+  padding-top: var(--bb-space-4);
+}
+
+.bb-bundle-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--bb-space-3);
+}
+
+.bb-bundle-total-label {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--bb-color-text-muted);
+}
+
+.bb-bundle-total-value {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.bb-bundle-cta {
+  margin-bottom: var(--bb-space-2); 
+}
+
+.bb-bundle-note {
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--bb-color-text-muted);
+}
+
+
+
+/* Shared buttons — reused by product cards and the bundle sidebar. */
+
+.bb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 36px;
+  padding: 0 var(--bb-space-4);
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.bb-btn:hover {
+  opacity: 0.9;
+}
+
+.bb-btn-outline {
+  border-color: var(--bb-color-text);
+  background: var(--bb-color-bg);
+  color: var(--bb-color-text);
+}
+
+.bb-btn-primary {
+  background: var(--bb-color-primary);
+  color: var(--bb-color-accent-text);
+}
+
+.bb-btn-dark {
+  background: var(--bb-color-dark);
+  color: #ffffff;
+  border-radius: 999px;
+}
+
+.bb-btn-full {
+  width: 100%;
+}
+
+
+/* --------------------------------------------------------------------------
+   Mobile toggle trigger — hidden on desktop by default.
+   -------------------------------------------------------------------------- */
+
+.bb-bundle-toggle {
+  display: none;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: var(--bb-color-text);
+  font-family: inherit;
+}
+
+.bb-bundle-toggle-text {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 16px;
+}
+
+.bb-bundle-toggle-meta {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--bb-color-text-muted);
+}
+
+.bb-bundle-toggle-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.bb-bundle-toggle[aria-expanded="true"] .bb-bundle-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — mobile (max-width: 749px)
+   Sidebar becomes a fixed bottom sheet; the item list + total + CTA
+   collapse behind the toggle button, controlled by aside-bar.js.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 749px) {
+  .bb-sidebar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    z-index: 40;
+  }
+
+  .bb-sidebar-card {
+    gap: var(--bb-space-3);
+    border-radius: 16px 16px 0 0;
+    padding: var(--bb-space-4);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .bb-sidebar-title {
+    display: none;
+  }
+
+  .bb-bundle-toggle {
+    display: flex;
+  }
+
+  .bb-bundle-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+  }
+
+  .bb-bundle-panel.is-open {
+    grid-template-rows: 1fr;
+  }
+
+  .bb-bundle-panel-inner {
+    overflow: hidden;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--bb-space-5);
+  }
+  .bb-bundle-slot{
+     padding:8px 6px;  }
+}

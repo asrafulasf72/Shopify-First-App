@@ -1,0 +1,106 @@
+/* ================================================
+   GRID LAYOUT (3+ products)
+   Scoped to snippets/bundle-products-grid.liquid
+   Depends on root variables defined in bb-bundle-widget.css
+   Works for N = 3, 4, 6, ... products
+================================================ */
+
+.bb-bundle-combo-grid{
+  flex: 1 1 100%;
+  margin-top: 16px;
+}
+
+.bb-bundle-thumb-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.bb-bundle-thumb{
+  width: 62px;
+  height: 62px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: var(--bundle-gray-100);
+  flex: 0 0 auto;
+}
+
+.bb-bundle-thumb-connector{
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bundle-purple);
+  color: var(--bundle-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.bb-bundle-checklist{
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bb-bundle-check-item{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--bundle-radius-sm);
+  background: var(--bundle-white);
+}
+
+.bb-bundle-check-item-checkbox{
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  background-color: var(--bundle-purple);
+  cursor: pointer;
+}
+
+.bb-bundle-check-item-title{
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--bundle-ink);
+  cursor: pointer;
+}
+
+.bb-bundle-check-item-price{
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.bb-bundle-check-item-price-current{
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--bundle-ink);
+}
+
+.bb-bundle-check-item-price-compare{
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bundle-gray-500);
+  text-decoration: line-through;
+}
+
+@media (max-width: 400px){
+  .bb-bundle-thumb{
+    width: 48px;
+    height: 48px;
+  }
+}

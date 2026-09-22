@@ -1,0 +1,196 @@
+.bb-product-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bb-space-3);
+  width: 100%;
+  border: 1px solid var(--bb-color-card-border);
+  border-radius: var(--bb-radius-lg);
+  padding: var(--bb-space-3);
+  background: var(--bb-color-bg);
+}
+
+.bb-product-image {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--bb-radius-md);
+  overflow: hidden;
+  background: var(--bb-color-bg-subtle);
+}
+
+.bb-media-empty {
+  background: var(--bb-color-bg-subtle);
+}
+
+.bb-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.bb-product-heading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--bb-space-2);
+}
+
+.bb-product-name {
+  font-size: 20px;
+  font-weight: 500;
+  color: #303030;
+   display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+   overflow: hidden;
+}
+
+.bb-product-price {
+  font-size: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #303030;
+}
+
+.bb-product-variant {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--bb-color-text-muted);
+}
+
+.bb-product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bb-space-2);
+  margin-top: auto;
+}
+
+/* Shared buttons — reused by product cards and the bundle sidebar. */
+
+.bb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 36px;
+  padding: 0 var(--bb-space-4);
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.bb-btn:hover {
+  opacity: 0.9;
+}
+
+.bb-btn-outline {
+  border-color: var(--bb-color-text);
+  background: var(--bb-color-bg);
+  color: var(--bb-color-text);
+}
+
+.bb-btn-primary {
+  background: var(--bb-color-primary);
+  color: var(--bb-color-accent-text);
+}
+
+.bb-btn-dark {
+  background: var(--bb-color-dark);
+  color: #ffffff;
+  border-radius: 999px;
+}
+
+.bb-btn-full {
+  width: 100%;
+}
+
+/* RESPONSIVE — mobile  */
+
+@media (max-width: 749px) {
+  .bb-product-card {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    grid-template-areas:
+      "image   info"
+      "variant variant"
+      "cta     cta";
+    column-gap: var(--bb-space-3);
+    row-gap: var(--bb-space-2);
+    width: 100%;
+  }
+
+  .bb-product-image {
+    grid-area: image;
+    aspect-ratio: 1 / 1;
+  }
+
+  .bb-product-info {
+    grid-area: info;
+    gap: 2px;
+  }
+
+  /* Name stacks above price instead of sitting on the same line, and
+     clamps to 2 lines so a long product name can't blow up the card. */
+  .bb-product-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .bb-product-name {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .bb-product-price {
+    font-size: 15px;
+  }
+
+  .bb-product-variant {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 300;
+    color: #303030;
+  }
+
+  /* Lift the two buttons out of .bb-product-actions so each can be placed
+     in its own grid area — both now span the full card width. */
+  .bb-product-actions {
+    display: contents;
+  }
+
+  .bb-product-actions .bb-btn-outline {
+    grid-area: variant;
+  }
+
+  .bb-product-actions .bb-btn-primary {
+    grid-area: cta;
+  }
+}
+
+@media (min-width: 1023px) {
+  .bb-product-info {
+    gap: 4px;
+  }
+  .bb-product-name,.bb-product-price{
+    font-size:18px ;
+  }
+  .bb-product-variant{
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .bb-product-info {
+    gap: 4px;
+  }
+  .bb-product-variant {
+    margin: 0;
+  }
+}

@@ -1,0 +1,40 @@
+:root{
+    --bundle-purple: #7C5CFC;
+    --bundle-purple-dark: #6C46F5;
+    --bundle-purple-tint: #F3EFFE;
+    --bundle-purple-border: #C9B8FA;
+    --bundle-ink: #16151A;
+    --bundle-gray-700: #4B4B57;
+    --bundle-gray-500: #8A8894;
+    --bundle-gray-300: #E3E1E8;
+    --bundle-gray-200: #EDEBF1;
+    --bundle-gray-100: #F1F0F4;
+    --bundle-white: #FFFFFF;
+    --bundle-radius-lg: 20px;
+    --bundle-radius-md: 16px;
+    --bundle-radius-sm: 10px;
+  }
+
+  /* Timer bar */
+  .bb-bundle-timer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: var(--bundle-radius-md);
+    background: var(--bundle-purple-tint);
+  }
+
+  .bb-bundle-timer-label{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bundle-purple-dark);
+  }
+
+  .bb-bundle-timer-value{
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--bundle-purple-dark);
+    font-variant-numeric: tabular-nums;
+  }

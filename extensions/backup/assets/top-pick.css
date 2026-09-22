@@ -1,0 +1,124 @@
+/* ---------- Top Pick card ---------- */
+
+.bb-toppick-card {
+  position: relative;
+  box-sizing: border-box;
+  border: 2px solid #7c5cfc;
+  border-radius: 16px;
+  background: #f5f3ff;
+  padding: 20px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bb-toppick-badge {
+  position: absolute;
+  top: -12px;
+  left: 16px;
+  background: #7c5cfc;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  transform: rotate(-2deg);
+}
+
+.bb-toppick-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bb-toppick-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.bb-radio {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 50%;
+  border: 2px solid #7c5cfc;
+  box-sizing: border-box;
+  position: relative;
+  margin-top: 2px;
+}
+
+.bb-radio-checked::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #7c5cfc;
+}
+
+.bb-radio-unchecked {
+  border-color: #d1d5db;
+}
+
+.bb-toppick-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bb-toppick-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.bb-toppick-subtext {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.bb-toppick-price {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+/* ---------- Color selector ---------- */
+
+.bb-color-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bb-color-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #1a1a1a;
+  flex-shrink: 0;
+}
+
+.bb-select-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.bb-select {
+  width: 64%;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px 8px 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+  cursor: pointer;
+}

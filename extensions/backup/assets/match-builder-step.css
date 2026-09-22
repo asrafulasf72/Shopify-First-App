@@ -1,0 +1,140 @@
+.bb-steps-wrapper {
+  display: flex;
+  justify-content: center;
+  margin:40px 0;
+}
+
+.bb-steps {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bb-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 50px;
+}
+
+.bb-step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1.5px solid var(--bb-color-border);
+  color: var(--bb-color-text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--bb-color-bg);
+}
+
+.bb-step-label {
+  font-size: 13px;
+  color: var(--bb-color-text-muted);
+}
+
+.bb-step.is-complete .bb-step-icon {
+  background: #9E77ED;
+  border-color: #7F56D9;
+  color: var(--bb-color-accent-text);
+}
+
+.bb-step.is-complete .bb-step-label {
+  color: var(--bb-color-text);
+  font-weight: 400;
+}
+
+.bb-step.is-active .bb-step-icon {
+  border-color: var(--bb-color-accent);
+  color: var(--bb-color-accent);
+}
+
+.bb-step.is-active .bb-step-label {
+  color: var(--bb-color-text);
+  font-weight: 400;
+}
+
+.bb-step-divider-complete {
+  width: 64px;
+  height: 1px;
+  margin-top: 15px;
+  background: #B692F6;
+}
+
+.bb-step-divider{
+  width: 64px;
+  height: 1px;
+  margin-top: 15px;
+  background: #A3A3A3;
+}
+
+
+
+.bb-steps-scroll {
+  max-width:90%;
+  min-width: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scrollbar-color: var(--bb-color-border) transparent;
+  cursor: grab;
+  padding:0 4px;
+  user-select: none;
+}
+
+
+.bb-steps-scroll.is-dragging {
+  cursor: grabbing;
+}
+
+.bb-steps-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.bb-steps-scroll::-webkit-scrollbar-thumb {
+  background: var(--bb-color-border);
+  border-radius: 999px;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — mobile (max-width: 749px)
+   Everything shrinks proportionally so the 3-step tracker fits inside a
+   320–390px viewport without wrapping.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 749px) {
+  .bb-steps-wrapper {
+    margin: var(--bb-space-5) 0;
+  }
+  .bb-step-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .bb-step-label {
+    font-size: 13px;
+  }
+
+  .bb-step-divider-complete,
+  .bb-step-divider {
+    width: 40px;
+    margin-top: 13px;
+  }
+   .bb-steps-scroll {
+    max-width:250px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .bb-steps-scroll {
+    max-width:90%;
+  }
+}

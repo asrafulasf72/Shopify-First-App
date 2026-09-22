@@ -1,0 +1,29 @@
+/* ---------- Reward progress ---------- */
+
+.bb-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 4px;
+}
+
+.bb-progress-track {
+  width: 100%;
+  height: 8px;
+  background: #ede9fe;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bb-progress-fill {
+  height: 100%;
+  width: 30%;
+  background: #7c5cfc;
+  border-radius: 999px;
+}
+
+.bb-progress-text {
+  margin: 0;
+  font-size: 13px;
+  color: #374151;
+}

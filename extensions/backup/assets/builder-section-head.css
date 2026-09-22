@@ -1,0 +1,198 @@
+.bb-toolbar {
+  display: flex;
+  width: 100%;
+  gap: var(--bb-space-3);
+  margin-bottom: var(--bb-space-4);
+}
+
+.bb-toolbar-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bb-space-4);
+  width: 100%;
+}
+
+.bb-section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--bb-space-4);
+  margin-bottom: var(--bb-space-4);
+}
+
+.bb-section-title {
+  margin: 0 0 var(--bb-space-2);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.bb-section-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: var(--bb-color-text-muted);
+}
+
+.bb-selection-count {
+  flex-shrink: 0;
+  padding: var(--bb-space-1) var(--bb-space-3);
+  border-radius: 999px;
+  font-size: 13px;
+  background-color: #F5F5F5;
+  color: var(--bb-color-text-muted);
+  white-space: nowrap;
+}
+
+.bb-search {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.bb-search-input {
+  display: block;
+  width: 100%;
+  height: 46px;
+  padding: 0 var(--bb-space-3) 0 36px;
+  border: 1px solid #D4D4D4;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #303030;
+  background: var(--bb-color-bg);
+}
+
+.bb-search-input::placeholder {
+  color: var(--bb-color-text-muted);
+}
+
+.bb-search-input:focus-visible {
+  outline:none;
+}
+.bb-search-input:focus,
+.bb-search-input:focus-visible{
+  outline: none;
+  box-shadow: none;
+  border-color: none;
+}
+
+.bb-filter-dropdown {
+  position: relative;
+  flex: 0 0 200px;
+}
+
+.bb-filter-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--bb-space-2);
+  width: 100%;
+  height: 46px;
+  padding: 0 var(--bb-space-3);
+  border: 1px solid #D4D4D4;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #303030;
+  background: var(--bb-color-bg);
+  cursor: pointer;
+}
+
+.bb-filter-trigger-icon {
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.bb-filter-dropdown[aria-expanded="true"] .bb-filter-trigger-icon,
+.bb-filter-trigger[aria-expanded="true"] .bb-filter-trigger-icon {
+  transform: rotate(180deg);
+}
+
+.bb-filter-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
+  max-height: 240px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 6px;
+  border: 1px solid var(--bb-color-border);
+  border-radius: 12px;
+  background: var(--bb-color-bg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+
+.bb-filter-options.is-open {
+  display: block;
+}
+
+/* Flip above the trigger when there's no room below */
+.bb-filter-dropdown.is-flipped .bb-filter-options {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+
+.bb-filter-option {
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #303030;
+  cursor: pointer;
+}
+
+.bb-filter-option:hover {
+  background: var(--bb-color-bg-subtle);
+}
+
+.bb-filter-option.is-selected {
+  font-weight: 600;
+  background: var(--bb-color-bg-subtle);
+}
+
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — mobile (max-width: 749px)
+   Section head can wrap if the title runs long; toolbar keeps search +
+   filter side-by-side but the filter shrinks so search gets the room.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 749px) {
+  .bb-section-head {
+    flex-wrap: wrap;
+    row-gap: var(--bb-space-2);
+    margin-bottom: var(--bb-space-3);
+  }
+
+  .bb-section-title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .bb-section-subtitle {
+    font-size: 13px;
+  }
+
+   .bb-toolbar {
+    flex-direction: column;
+    gap: var(--bb-space-2);
+  }
+
+  .bb-search {
+    width: 100%;
+  }
+
+  .bb-filter-dropdown {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .bb-search-input {
+    height: 44px;
+    width: 100%;
+    font-size: 14px;
+    padding: 0 8px;
+  }
+}

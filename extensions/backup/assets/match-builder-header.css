@@ -1,0 +1,69 @@
+/*  SNIPPET: bb-promo — top savings banner  */
+
+.bb-promo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bb-space-2);
+  align-self: center;
+  padding: var(--bb-space-2) var(--bb-space-3);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--bb-color-text-muted);
+  background: #F5F5F5;
+}
+
+.bb-promo-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.bb-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--bb-space-4);
+}
+
+.bb-heading {
+  margin: var(--bb-space-1) 0 0;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.bb-subheading {
+  margin: 0 0 var(--bb-space-2);
+  font-size: 15px;
+  color: var(--bb-color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — mobile (max-width: 749px)
+   Tighter spacing, smaller type scale — matches the compact header in the
+   mobile reference.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 749px) {
+  .bb-header {
+    gap: var(--bb-space-3);
+  }
+
+  .bb-promo {
+    padding: 6px var(--bb-space-3);
+    font-size: 13px;
+  }
+
+  .bb-promo-icon {
+    font-size: 13px;
+  }
+
+  .bb-heading {
+    font-size: 24px;
+  }
+
+  .bb-subheading {
+    font-size: 14px;
+  }
+}

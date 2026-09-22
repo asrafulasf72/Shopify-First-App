@@ -1,0 +1,66 @@
+/* ---------- Duo / Family pack options ---------- */
+
+.bb-tier-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bb-tier-option {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 16px;
+  background: #ffffff;
+}
+
+.bb-tier-option-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.bb-tier-option-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bb-tier-option-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.bb-tier-option-subtext {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.bb-tier-option-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.bb-tier-option-price {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+.bb-tier-option-strike {
+  font-size: 13px;
+  font-weight: 500;
+  color: #9ca3af;
+  text-decoration: line-through;
+  white-space: nowrap;
+}
