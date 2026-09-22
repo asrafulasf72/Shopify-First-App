@@ -1,0 +1,130 @@
+{{ 'offer-stack.css' | asset_url | stylesheet_tag }}
+
+<div class="bb-stack-widget">
+  {% render 'bundle-header' %}
+
+  <div class="bb-stack-toppick" data-bb-collapsible>
+    <span class="bb-stack-badge">Top Pick</span>
+
+    <!-- Main card: ekhane click korle toggle hobe -->
+    <div
+      class="bb-stack-row"
+      data-bb-toggle
+      role="button"
+      tabindex="0"
+      aria-expanded="false"
+    >
+      {%- comment -%} Leading element: schema setting onujayi badlabe {%- endcomment -%}
+      {%- assign lead_style = block.settings.lead_style | default: 'image' -%}
+
+      {% case lead_style %}
+        {% when 'quantity' %}
+          {% render 'lead-quantity', text: '3x' %}
+        {% when 'radio' %}
+          {% render 'lead-radio' %}
+        {% else %}
+          {% render 'lead-image', src: 'https://picsum.photos/seed/vitamin-c-serum/120/120', alt: 'Single pack' %}
+      {% endcase %}
+
+      <div class="bb-stack-info">
+        <p class="bb-stack-name">Single pack</p>
+        <p class="bb-stack-subtext">No discount</p>
+      </div>
+      <span class="bb-stack-price">$29.99</span>
+    </div>
+
+    <!-- Collapsible part -->
+    <div class="bb-collapse">
+      <div class="bb-collapse-inner">
+        <!-- Color #1 -->
+        <div class="bb-color-row">
+          <label class="bb-color-label">Color #1</label>
+          <div class="bb-select-wrap" data-bb-dropdown>
+            <button
+              type="button"
+              class="bb-select"
+              data-bb-dropdown-trigger
+              aria-haspopup="listbox"
+              aria-expanded="false"
+            >
+              <span class="bb-select-label" data-bb-dropdown-label>Black</span>
+              <svg
+                class="bb-select-arrow"
+                viewBox="0 0 20 20"
+                fill="none"
+                width="16"
+                height="16"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <ul class="bb-select-options" role="listbox" data-bb-dropdown-options>
+              <li class="bb-select-option bb-filter-option is-selected" role="option" data-value="black">Black</li>
+              <li class="bb-select-option bb-filter-option" role="option" data-value="white">White</li>
+              <li class="bb-select-option bb-filter-option" role="option" data-value="navy">Navy</li>
+              <li class="bb-select-option bb-filter-option" role="option" data-value="red">Red</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Color #2 (screenshot e shudhu Color #1 chilo. Dorkar na hole ei block ta delete korun) -->
+        <div class="bb-color-row">
+          <label class="bb-color-label">Color #2</label>
+          <div class="bb-select-wrap" data-bb-dropdown>
+            <button
+              type="button"
+              class="bb-select"
+              data-bb-dropdown-trigger
+              aria-haspopup="listbox"
+              aria-expanded="false"
+            >
+              <span class="bb-select-label" data-bb-dropdown-label>Black</span>
+              <svg
+                class="bb-select-arrow"
+                viewBox="0 0 20 20"
+                fill="none"
+                width="16"
+                height="16"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <ul class="bb-select-options" role="listbox" data-bb-dropdown-options>
+              <li class="bb-select-option bb-filter-option is-selected" role="option" data-value="black">Black</li>
+              <li class="bb-select-option bb-filter-option" role="option" data-value="white">White</li>
+              <li class="bb-select-option bb-filter-option" role="option" data-value="navy">Navy</li>
+              <li class="bb-select-option bb-filter-option" role="option" data-value="red">Red</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'offer-stack.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'dropdown-trigger.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Offer Stack",
+  "target": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "lead_style",
+      "label": "Leading element style",
+      "default": "image",
+      "options": [
+        { "value": "image", "label": "Product image" },
+        { "value": "quantity", "label": "Quantity badge (1x)" },
+        { "value": "radio", "label": "Radio button" }
+      ]
+    }
+  ]
+}
+{% endschema %}
