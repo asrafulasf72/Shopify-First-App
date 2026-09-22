@@ -1,0 +1,15 @@
+{{ 'match-builder-card.css' | asset_url | stylesheet_tag }}
+<div class="bb-product-card">
+  <div class="bb-product-image">{{ 'product-1' | placeholder_svg_tag: 'bb-product-image-tag' }}</div>
+  <div class="bb-product-info">
+    <div class="bb-product-heading-row">
+      <span class="bb-product-name">Gentle Cleanser Gentle Cleanser Gentle Cleanser Gentle Cleanser Gentle Cleanser</span>
+      <span class="bb-product-price">$18.00</span>
+    </div>
+    <p class="bb-product-variant">Selected: Olive / Oily / 200ml</p>
+  </div>
+  <div class="bb-product-actions">
+    <button type="button" class="bb-btn bb-btn-outline" data-bb-modal-trigger>Select variant</button>
+    <button type="button" class="bb-btn bb-btn-primary">Add to bundle</button>
+  </div>
+</div>

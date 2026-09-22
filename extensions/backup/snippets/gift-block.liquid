@@ -1,0 +1,26 @@
+{{ 'gift-block.css' | asset_url | stylesheet_tag }}
+
+<div class="bb-gift-pill-wraper">
+  <!-- Free Gift -->
+  <div class="bb-gift-pill">
+    <img
+      src="https://picsum.photos/seed/vitamin-c-serum/120/120"
+      alt="Free gift"
+      class="bb-gift-image"
+    />
+    <span>Free gift</span>
+  </div>
+
+  <div class="bb-gift-divider"></div>
+
+  <!-- Add Pouch -->
+  <label class="bb-pouch-option">
+    <input type="checkbox" />
+    <span class="bb-custom-checkbox"></span>
+
+    <div class="bb-pouch-content">
+      <div class="bb-title">Add pouch</div>
+      <div class="bb-price">+$4.00</div>
+    </div>
+  </label>
+</div>

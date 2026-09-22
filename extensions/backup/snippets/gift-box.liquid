@@ -1,0 +1,11 @@
+{{ 'gift-box.css' | asset_url | stylesheet_tag }}
+
+<div class="bb-gift-banner">
+  <div class="bb-gift-icon-box">
+    {% render 'icons', name: 'gift' %}
+  </div>
+  <div class="bb-gift-content">
+    <p class="bb-gift-title">+FREE Gift</p>
+    <p class="bb-gift-subtitle">Wraps into your bundle &middot; $15 value</p>
+  </div>
+</div>

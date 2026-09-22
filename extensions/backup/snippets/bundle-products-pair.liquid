@@ -1,0 +1,50 @@
+{% comment %}
+  bundle-products-pair.liquid
+  ----------------------------------------------------
+  100% static raw HTML/CSS. No loops, no conditions, no settings.
+  This is exactly the "red marked" part from the original code,
+  just moved into its own snippet file.
+
+  Include it from the section like this:
+    {% render 'bundle-products-pair' %}
+{% endcomment %}
+
+{{ 'bundle-products-pair.css' | asset_url | stylesheet_tag }}
+
+<div class="bb-bundle-products">
+  <div class="bb-bundle-product">
+    <img
+      class="bb-bundle-product-image"
+      src="https://picsum.photos/seed/street-runner-1/200/200"
+      alt="Street Runner"
+      width=""
+      height=""
+    />
+
+    <p class="bb-bundle-product-title">Street Runner</p>
+
+    <div>
+      <span class="bb-bundle-product-price-current">$300.00</span>
+      <span class="bb-bundle-product-price-compare">$500.00</span>
+    </div>
+  </div>
+
+  <div class="bb-bundle-product">
+    <img
+      class="bb-bundle-product-image"
+      src="https://picsum.photos/seed/street-runner-2/200/200"
+      alt="Street Runner"
+      width=""
+      height=""
+    />
+
+    <p class="bb-bundle-product-title">Street Runner</p>
+
+    <div>
+      <span class="bb-bundle-product-price-current">$300.00</span>
+      <span class="bb-bundle-product-price-compare">$500.00</span>
+    </div>
+  </div>
+
+  <span class="bb-bundle-products-connector" aria-hidden="true"> + </span>
+</div>

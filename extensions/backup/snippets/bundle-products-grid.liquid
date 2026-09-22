@@ -1,0 +1,103 @@
+{{ 'bundle-products-grid.css' | asset_url | stylesheet_tag }}
+
+<div class="bb-bundle-combo-grid">
+  <div class="bb-bundle-thumb-row">
+    <img
+      class="bb-bundle-thumb"
+      src="https://picsum.photos/seed/vitamin-c-serum/120/120"
+      alt="Vitamin C Serum"
+      width=""
+      height=""
+    />
+
+    <span class="bb-bundle-thumb-connector" aria-hidden="true">+</span>
+
+    <img
+      class="bb-bundle-thumb"
+      src="https://picsum.photos/seed/kb2-serum/120/120"
+      alt="KB2 Serum"
+      width=""
+      height=""
+    />
+
+    <span class="bb-bundle-thumb-connector" aria-hidden="true">+</span>
+
+    <img
+      class="bb-bundle-thumb"
+      src="https://picsum.photos/seed/b12-serum/120/120"
+      alt="B12 Serum"
+      width=""
+      height=""
+    />
+
+    <!-- no connector after the last thumbnail -->
+  </div>
+
+  <ul class="bb-bundle-checklist">
+    <li class="bb-bundle-check-item">
+      <input
+        class="bb-bundle-check-item-checkbox"
+        type="checkbox"
+        id="bundle-item-1"
+        checked
+        disabled
+      />
+
+      <label
+        class="bb-bundle-check-item-title"
+        for="bundle-item-1"
+      >
+        Vitamin C Serum
+      </label>
+
+      <span class="bb-bundle-check-item-price">
+        <span class="bb-bundle-check-item-price-current">$300.00</span>
+        <span class="bb-bundle-check-item-price-compare">$500.00</span>
+      </span>
+    </li>
+
+    <li class="bb-bundle-check-item">
+      <input
+        class="bb-bundle-check-item-checkbox"
+        type="checkbox"
+        id="bundle-item-2"
+        checked
+        disabled
+      />
+
+      <label
+        class="bb-bundle-check-item-title"
+        for="bundle-item-2"
+      >
+        KB2 Serum
+      </label>
+
+      <span class="bb-bundle-check-item-price">
+        <span class="bb-bundle-check-item-price-current">$300.00</span>
+        <span class="bb-bundle-check-item-price-compare">$500.00</span>
+      </span>
+    </li>
+
+    <li class="bb-bundle-check-item">
+      <input
+        class="bb-bundle-check-item-checkbox"
+        type="checkbox"
+        id="bundle-item-3"
+        checked
+        disabled
+      />
+
+      <label
+        class="bb-bundle-check-item-title"
+        for="bundle-item-3"
+      >
+        B12 Serum
+      </label>
+
+      <span class="bb-bundle-check-item-price">
+        <span class="bb-bundle-check-item-price-current">$300.00</span>
+        <span class="bb-bundle-check-item-price-compare">$500.00</span>
+      </span>
+    </li>
+  </ul>
+</div>

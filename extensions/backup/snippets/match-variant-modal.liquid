@@ -1,0 +1,157 @@
+{{ 'match-variant-modal.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%} SNIPPET: bb-modal — variant picker, hidden by default, opened via JS {%- endcomment -%}
+<div class="bb-modal-overlay">
+  <div class="bb-modal" role="dialog" aria-modal="true" aria-labelledby="bb-modal-title">
+
+    <div class="bb-modal-header">
+      <h3 id="bb-modal-title" class="bb-modal-title">Select your variant</h3>
+      <button type="button" class="bb-modal-close" data-bb-modal-close aria-label="Close">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+          <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="bb-modal-product">
+      <div class="bb-modal-product-image">{{ 'product-1' | placeholder_svg_tag: 'bb-product-image-tag' }}</div>
+      <div class="bb-modal-product-info">
+        <span class="bb-modal-product-name">Foaming Cleanser</span>
+        <span class="bb-modal-product-price">$18.00</span>
+      </div>
+    </div>
+
+    <div class="bb-modal-group">
+      <h4 class="bb-modal-group-title">Color</h4>
+      <div class="bb-swatch-row" data-bb-scroll-drag>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch is-selected" style="background:#63A35F;">
+            <span class="bb-swatch-check">&#10003;</span>
+          </button>
+          <span class="bb-swatch-label">Forest</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#AFA062;"></button>
+          <span class="bb-swatch-label">Sand</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch  is-disabled" style="background:#6590FF;" disabled></button>
+          <span class="bb-swatch-label">Sky</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+        <div class="bb-swatch-item">
+          <button type="button" class="bb-swatch" style="background:#BA97E4;"></button>
+          <span class="bb-swatch-label">Lilac</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bb-modal-group">
+      <h4 class="bb-modal-group-title">Skin Type: <span class="bb-modal-group-value">Combine</span></h4>
+      <div class="bb-pill-row">
+        <button type="button" class="bb-pill">Mature</button>
+        <button type="button" class="bb-pill is-disabled" disabled>Oily</button>
+        <button type="button" class="bb-pill is-selected">Combine</button>
+        <button type="button" class="bb-pill">Sensitive</button>
+        <button type="button" class="bb-pill is-disabled" disabled>Rosacea</button>
+        <button type="button" class="bb-pill">Dry</button>
+      </div>
+    </div>
+
+    <div class="bb-modal-group">
+      <h4 class="bb-modal-group-title">Capacity</h4>
+      <div class="bb-pill-row">
+        <button type="button" class="bb-pill">100ml</button>
+        <button type="button" class="bb-pill is-disabled" disabled>150ml</button>
+        <button type="button" class="bb-pill">200ml</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="{{ 'match-variant-modal.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'scroll-drag.js' | asset_url }}" defer="defer"></script>
