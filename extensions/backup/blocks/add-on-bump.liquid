@@ -1,0 +1,23 @@
+{{ 'add-on-bump.css' | asset_url | stylesheet_tag }}
+
+<div class="bb-bundle-widget">
+  {% render 'bundle-header' %}
+  {% render 'bundle-timer' %}
+  {% render 'social-row' %}
+  {% render 'top-pick' %}
+
+  <div class="bb-tier-options">
+     {% render 'duo-pack' %}
+    {% render 'pack' %}
+  </div>
+  {% render 'addon-row' %}
+  {% render 'progress' %}
+  {% render 'bundle-cta' %}
+</div>
+
+{% schema %}
+{
+  "name": "Add-on Bump",
+  "target": "section"
+}
+{% endschema %}
