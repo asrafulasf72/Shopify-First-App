@@ -1,0 +1,21 @@
+{{ 'bundle.css' | asset_url | stylesheet_tag }}
+
+<div class="bb-bundle-widget" aria-label="Build your bundle">
+  {% render 'bundle-header' %}
+  {% render 'bundle-timer' %}
+
+  <div class="bb-bundle-options">
+    {% render 'single-pair' %}
+    {% render 'combo-pair' %}
+  </div>
+
+  {% render 'bundle-cta' %}
+</div>
+
+{% schema %}
+{
+  "name": "Bundle Widget",
+  "target": "section",
+  "settings": []
+}
+{% endschema %}
