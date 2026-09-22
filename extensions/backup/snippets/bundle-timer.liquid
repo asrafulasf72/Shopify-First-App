@@ -1,0 +1,11 @@
+{{ 'bundle-timer.css' | asset_url | stylesheet_tag }}
+<div class="bb-bundle-timer">
+  <span class="bb-bundle-timer-label">Offer ends in</span>
+  <span
+    class="bb-bundle-timer-value"
+    data-bundle-timer
+    data-duration-seconds="{{ minutes | times: 60 }}"
+  >
+    00:45:00
+  </span>
+</div>

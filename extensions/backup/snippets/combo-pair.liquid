@@ -1,0 +1,35 @@
+    
+    {{ 'combo-pair.css' | asset_url | stylesheet_tag }}
+    <div class="bb-bundle-option bb-bundle-option--selected">
+
+      <span class="bb-bundle-option-badge">
+        Top combo
+      </span>
+
+      <input
+        class="bb-bundle-option-radio"
+        type="radio"
+        name="bundle-choice"
+        id="bundle-combo"
+        checked
+      />
+
+      <div class="bb-bundle-option-info">
+        <label class="bb-bundle-option-title" for="bundle-combo">
+          Better together
+        </label>
+        <p class="bb-bundle-option-subtitle">
+          pair &amp; pocket $200
+        </p>
+      </div>
+
+      <div class="bb-bundle-option-price">
+        <span class="bb-bundle-option-price-current">$300.00</span>
+        <span class="bb-bundle-option-price-compare">$500.00</span>
+      </div>
+
+      {% comment %} {% render 'bundle-products-pair' %} {% endcomment %}
+      {% comment %} {% render 'bundle-products-grid' %} {% endcomment %}
+       {% render 'combo-pair-third' %}
+
+    </div>
