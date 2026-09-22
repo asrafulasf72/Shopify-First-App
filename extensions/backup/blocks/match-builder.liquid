@@ -1,0 +1,39 @@
+{{ 'match-builder.css' | asset_url | stylesheet_tag }}
+
+<div class="bb-widget">
+   {% render 'match-builder-header' %}
+   {% render 'match-builder-step' %}
+
+  {%- comment -%}
+    SNIPPET: bb-layout — full-width toolbar row, then a two-column
+    row (cards + bundle sidebar) that starts at the same vertical position
+  {%- endcomment -%}
+  <div class="bb-layout">
+   {% render 'builder-section-head' %}
+
+    {%- comment -%} SNIPPET: bb-columns — product cards (left) + bundle sidebar (right), top-aligned {%- endcomment -%}
+    <div class="bb-columns">
+      <div class="bb-main">
+        {%- comment -%} SNIPPET: bb-product-grid — selectable product cards {%- endcomment -%}
+        <div class="bb-product-grid">
+          {% render 'match-builder-card' %}
+          {% render 'match-builder-card' %}
+          {% render 'match-builder-card' %}
+          {% render 'product-card-skeleton' %}
+          {% render 'product-card-skeleton' %}
+          {% render 'product-card-skeleton' %}
+        </div>
+      </div>
+      {% render 'aside-bar' %}
+    </div>
+  </div>
+  {% render 'match-variant-modal' %}
+</div>
+
+{% schema %}
+{
+  "name": "Match Builder",
+  "target": "section",
+  "settings": []
+}
+{% endschema %}
