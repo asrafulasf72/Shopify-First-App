@@ -1,0 +1,120 @@
+{{ 'package-card.css' | asset_url | stylesheet_tag }}
+
+<div class="bb-pkg-widget">
+  {% render 'bundle-header' %}
+
+  <div class="bb-pkg-grid">
+    <div class="bb-pkg-card">
+      {% comment %} <span class="bb-pkg-chip">1x</span> {% endcomment %}
+      <div>
+        <img
+          class="bb-pkg-chip"
+          src="https://picsum.photos/seed/vitamin-c-serum/120/120"
+          alt="Street Runner"
+          width="62"
+          height="62"
+          loading="lazy"
+        >
+      </div>
+      <div>
+        <p class="bb-pkg-name">Single pack</p>
+        <p class="bb-pkg-subtext">No discount</p>
+      </div>
+      <div class="bb-pkg-price-group">
+        <span class="bb-pkg-price">$29.99</span>
+      </div>
+      <a href="#" class="bb-pkg-variant-link" data-open-variant-modal>Select variant</a>
+    </div>
+
+    <div class="bb-pkg-card bb-pkg-card-popular">
+      <span class="bb-pkg-badge">Popular</span>
+      {% comment %} <span class="bb-pkg-chip bb-pkg-chip-active">2x</span> {% endcomment %}
+      <div>
+        <img
+          class="bb-pkg-chip"
+          src="https://picsum.photos/seed/vitamin-c-serum/120/120"
+          alt="Street Runner"
+          width="62"
+          height="62"
+          loading="lazy"
+        >
+      </div>
+      <div>
+        <p class="bb-pkg-name">Duo pack</p>
+        <p class="bb-pkg-subtext">Save $6.78</p>
+      </div>
+      <div class="bb-pkg-price-group">
+        <span class="bb-pkg-price">$29.99</span>
+        <span class="bb-pkg-strike">$52.99</span>
+      </div>
+      {% render 'gift-block' %}
+      <a href="#" class="bb-pkg-variant-link" data-open-variant-modal>Select variant</a>
+    </div>
+
+    <div class="bb-pkg-card bb-pkg-card-bestdeal">
+      <span class="bb-pkg-badge">Best deal</span>
+      {% comment %} <span class="bb-pkg-chip">3x</span> {% endcomment %}
+      <div>
+        <img
+          class="bb-pkg-chip"
+          src="https://picsum.photos/seed/vitamin-c-serum/120/120"
+          alt="Street Runner"
+          width="62"
+          height="62"
+          loading="lazy"
+        >
+      </div>
+      <div>
+        <p class="bb-pkg-name">Family pack</p>
+        <p class="bb-pkg-subtext">Save $9.78</p>
+      </div>
+      <div class="bb-pkg-price-group">
+        <span class="bb-pkg-price">$31.99</span>
+        <span class="bb-pkg-strike">$72.99</span>
+      </div>
+      {% render 'gift-block' %}
+      <a href="#" class="bb-pkg-variant-link" data-open-variant-modal>Select variant</a>
+    </div>
+  </div>
+  {% render 'free-gift' %}
+  {% render 'addon-row' %}
+  {% render 'bundle-cta' %}
+
+  <!-- ===== Variant Select Modal ===== -->
+  <div class="bb-variant-modal-overlay" id="bbVariantModalOverlay">
+    <div class="bb-variant-modal">
+      <button type="button" class="bb-variant-modal-close" id="bbVariantModalClose" aria-label="Close">&times;</button>
+
+      <div class="bb-variant-modal-group">
+        <p class="bb-variant-modal-label">Color #1</p>
+        <select class="bb-variant-modal-select">
+          <option>Black</option>
+        </select>
+        <select class="bb-variant-modal-select">
+          <option>Black</option>
+        </select>
+      </div>
+
+      <div class="bb-variant-modal-divider"></div>
+
+      <div class="bb-variant-modal-group">
+        <p class="bb-variant-modal-label">Size #1</p>
+        <select class="bb-variant-modal-select">
+          <option>L</option>
+        </select>
+        <select class="bb-variant-modal-select">
+          <option>XXL</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'variant-modal.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Package Card",
+  "target": "section"
+}
+{% endschema %}
